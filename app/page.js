@@ -2,16 +2,16 @@ import Link from 'next/link';
 
 const Home = () => {
   return (
-    <div>
-      <h1 className="text-2xl mb-4">CPRG 306: Web Development 2 - Assignments</h1>
-      <div>
+    <div className="flex flex-col items-center">
+      <h1 className="text-2xl text-center p-5 my-4">CPRG 306: Web Development 2 - Assignments</h1>
+      <div className="w-64">
         <Link href="/week-2">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">Week-2 Page 2</button>
+          <button className="w-full h-12 bg-blue-950 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-5">Week-2 Page 2</button>
         </Link>
       </div>
-      <div>
+      <div className="w-64">
         <Link href="/week-3">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">Week-3 Shopping list</button>
+          <button className="w-full h-12 bg-blue-950 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-5">Week-3 Shopping list</button>
         </Link>
       </div>
     </div>
@@ -19,6 +19,7 @@ const Home = () => {
 };
 
 export default Home;
+
 
 
 

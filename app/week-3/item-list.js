@@ -35,30 +35,30 @@ const ItemList = () => {
     {
       name: "Pasta Sauce 🍝",
       quantity: 3,
-      category: "Canned goods",
+      category: "Canned Goods",
     },
     {
-      name: "Spaghetti, 454 g 🍝",
+      name: "Spaghetti, 454g 🍝",
       quantity: 2,
-      category: "Dry goods",
+      category: "Dry Goods",
     },
     {
-      name: "Toilet paper, 12 pack 🧻",
+      name: "Toilet Paper, 12 Pack 🧻",
       quantity: 1,
       category: "Household",
     },
     {
-      name: "Paper towels, 6 pack",
+      name: "Paper Towels, 6 pack",
       quantity: 1,
       category: "Household",
     },
     {
-      name: "Dish soap 🍽️",
+      name: "Dish Soap 🍽️",
       quantity: 1,
       category: "Household",
     },
     {
-      name: "Hand soap 🧼",
+      name: "Hand Soap 🧼",
       quantity: 4,
       category: "Household",
     },
