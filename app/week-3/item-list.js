@@ -1,7 +1,7 @@
 import Item from './Item.js';
 
 const ItemList = () => {
-  const items = [
+  const items1= [
     {
       name: "Milk, 4 L 🥛",
       quantity: 1,
@@ -66,7 +66,7 @@ const ItemList = () => {
 
   return (
     <ul className="list-disc pl-5">
-      {items.map((item, index) => (
+      {items1.map((item, index) => (
         <Item key={index} {...item} />
       ))}
     </ul>
