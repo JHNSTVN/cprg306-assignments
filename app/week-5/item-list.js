@@ -5,14 +5,14 @@ import itemsData from './items.json';
 
 const ItemList = () => {
   const [sortBy, setSortBy] = useState('name');
-  const [sortedItems, setSortedItems] = useState([...itemsData]);
+  const [sortedItems, setSortedItems] = useState([itemsData]);
 
   useEffect(() => {
     sortItems(sortBy);
   }, [sortBy]);
 
   const sortItems = (sortKey) => {
-    const itemsToSort = [...itemsData];
+    const itemsToSort = [itemsData];
     itemsToSort.sort((a, b) => {
       if (sortKey === 'name') {
         return a.name.localeCompare(b.name);
