@@ -1,76 +1,50 @@
+"use client"
+import React, { useState, useEffect } from 'react';
 import Item from './item.js';
+import itemsData from './items.json';
 
 const ItemList = () => {
-  const items1= [
-    {
-      name: "Milk, 4 L 🥛",
-      quantity: 1,
-      category: "Dairy",
-    },
-    {
-      name: "Bread 🍞",
-      quantity: 2,
-      category: "Bakery",
-    },
-    {
-      name: "Eggs, Dozen 🥚",
-      quantity: 2,
-      category: "Dairy",
-    },
-    {
-      name: "Bananas 🍌",
-      quantity: 6,
-      category: "Produce",
-    },
-    {
-      name: "Broccoli 🥦",
-      quantity: 3,
-      category: "Produce",
-    },
-    {
-      name: "Chicken Breasts, 1 kg 🍗",
-      quantity: 1,
-      category: "Meat",
-    },
-    {
-      name: "Pasta Sauce 🍝",
-      quantity: 3,
-      category: "Canned Goods",
-    },
-    {
-      name: "Spaghetti, 454g 🍝",
-      quantity: 2,
-      category: "Dry Goods",
-    },
-    {
-      name: "Toilet Paper, 12 Pack 🧻",
-      quantity: 1,
-      category: "Household",
-    },
-    {
-      name: "Paper Towels, 6 pack",
-      quantity: 1,
-      category: "Household",
-    },
-    {
-      name: "Dish Soap 🍽️",
-      quantity: 1,
-      category: "Household",
-    },
-    {
-      name: "Hand Soap 🧼",
-      quantity: 4,
-      category: "Household",
-    },
-  ];
+  const [sortBy, setSortBy] = useState('name');
+  const [sortedItems, setSortedItems] = useState([...itemsData]);
+
+  useEffect(() => {
+    sortItems(sortBy);
+  }, [sortBy]);
+
+  const sortItems = (sortKey) => {
+    const itemsToSort = [...itemsData];
+    itemsToSort.sort((a, b) => {
+      if (sortKey === 'name') {
+        return a.name.localeCompare(b.name);
+      } else if (sortKey === 'category') {
+        return a.category.localeCompare(b.category);
+      }
+    });
+    setSortedItems(itemsToSort);
+  };
 
   return (
-    <ul className="list-disc pl-5">
-      {items1.map((item, index) => (
-        <Item key={index} {...item} />
-      ))}
-    </ul>
+    <div>
+      <button
+        onClick={() => setSortBy('name')}
+        className={`w-full h-12 ${sortBy === 'name' ? 'bg-blue-950' : 'bg-blue-700'} hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-5`}
+      >
+        Sort by Name
+      </button>
+      <button
+        onClick={() => setSortBy('category')}
+        className={`w-full h-12 ${sortBy === 'category' ? 'bg-blue-950' : 'bg-blue-700'} hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-5`}
+      >
+        Sort by Category
+      </button>
+      <ul className="list-disc pl-5">
+        {sortedItems.map((item) => (
+          <Item key={item.id} name={item.name} quantity={item.quantity} category={item.category} />
+        ))}
+      </ul>
+    </div>
   );
 };
 
 export default ItemList;
+
