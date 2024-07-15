@@ -1,10 +1,10 @@
 'use client'
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { useUserAuth } from '../_utils/auth-context'; 
-import ItemList from 'week-7/item-list.js';
-import NewItem from 'week-7/new-item.js';
-import MealIdeas from 'week-7/meal-ideas.js';
+import { useUserAuth } from './../_utils/auth-context'; 
+import ItemList from './item-list.js';
+import NewItem from './new-item.js';
+import MealIdeas from './meal-ideas.js';
 import itemsData from './items.json';
 
 const Page = () => {
