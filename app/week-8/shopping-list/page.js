@@ -1,18 +1,22 @@
 'use client'
-import React, { useState } from 'react';
-import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
+import { withRouter } from 'next/router';
 import { useUserAuth } from './../_utils/auth-context'; 
-import ItemList from './item-list.js';
-import NewItem from './new-item.js';
-import MealIdeas from './meal-ideas.js';
-import itemsData from './items.json';
+import ItemList from './item-list';
+import NewItem from './new-item';
+import MealIdeas from './meal-ideas';
+import itemsData from './item';
 
-const Page = () => {
+const Page = ({ router }) => {
   const { user } = useUserAuth();
-  const router = useRouter();
+
+  useEffect(() => {
+    if (!user) {
+      router.push('/');
+    }
+  }, [user, router]);
 
   if (!user) {
-    router.push('/');
     return null;
   }
 
@@ -42,6 +46,6 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default withRouter(Page);
 
 

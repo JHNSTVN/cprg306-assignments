@@ -1,6 +1,6 @@
 'use client'
 // Import the useUserAuth hook
-import { AuthProvider, useUserAuth } from "./_utils/auth-context";
+import { useUserAuth } from "./_utils/auth-context";
 import Link from 'next/link';
 
 // Use the useUserAuth hook to get the user object and the login and logout functions
@@ -26,24 +26,17 @@ function Page() {
     };
  
 // Display some of the user's information
-    return (
-        <div>
-            <p>CPRG-306</p>
-            <p>Week 8 APP</p>
-            {user ? (
-                <div>
-                    <p>Hello & Welcome, {user.displayName} ({user.email})</p> 
-                    <Link href="app/week-8/shopping-list/page.js">Go to Shopping List</Link>
-                    <div>
-                    <button onClick={handleLogout}>Logout</button>
-                    </div>
-                </div>
-            ):
-            (
-                <button onClick={handleLogin}>Login with GitHub</button>
-            )}
-        </div>
+    if (!user) {
+        return <button onClick={handleLogin}>Login with GitHub</button>;
+    } else {
+        return (
+            <div>
+                <p>Welcome, {user.displayName} ({user.email})</p>
+                <Link href="./week-8/shopping-list">Go to Shopping List</Link>
+                <button onClick={handleLogout}>Logout</button>
+            </div>
     );
+}
 }
 
 export default Page;
