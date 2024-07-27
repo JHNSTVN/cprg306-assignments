@@ -1,42 +1,81 @@
-'use client'
-// Import the useUserAuth hook
-import { useUserAuth } from "./_utils/auth-context";
-import Link from 'next/link';
+'use client';
 
-// Use the useUserAuth hook to get the user object and the login and logout functions
-function Page() {
+import React, { useEffect, useState } from 'react';
+import { useUserAuth } from './_utils/auth-context';
+import { useRouter } from 'next/navigation';
+import ItemList from './shopping-list/item-list';
+import NewItem from './shopping-list/new-item';
+import MealIdeas from './shopping-list/meal-ideas';
+import itemsData from './shopping-list/items.json'; 
+
+const Page = () => {
     const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
-    
-// Sign in to Firebase with GitHub authentication
-    const handleLogin = async () => {
-        try {
-            await gitHubSignIn();
-        } catch (error) {
-            console.error("Error signing in", error);
+    const router = useRouter();
+  
+    const [items, setItems] = useState([]);
+    const [selectedItemName, setSelectedItemName] = useState(null);
+  
+    useEffect(() => {
+        if (user) {
+            setItems(itemsData); 
         }
-    };
- 
-// Sign out of Firebase
+    }, [user]);
+  
     const handleLogout = async () => {
         try {
             await firebaseSignOut();
+            router.push('/week-8'); 
         } catch (error) {
-            console.error("Error signing out", error);
+            console.error("Logout failed:", error);
         }
     };
- 
-// Display some of the user's information
+  
+    const handleAddItem = (newItem) => {
+        setItems(prevItems => [...prevItems, newItem]);
+    };
+  
+    const handleItemSelect = (item) => {
+        const name = item.name.split(',')[0].trim();
+        setSelectedItemName(name);
+    };
+  
     if (!user) {
-        return <button onClick={handleLogin}>Login with GitHub</button>;
-    } else {
         return (
-            <div>
-                <p>Welcome, {user.displayName} ({user.email})</p>
-                <Link href="./week-8/shopping-list">Go to Shopping List</Link>
-                <button onClick={handleLogout}>Logout</button>
+            <div className="flex flex-col items-center justify-center h-screen bg-white p-6">
+                <h1 className="text-4xl font-extrabold mb-6 text-black">Hello and Welcome!</h1>
+                <p className="text-lg mb-6 text-black">To proceed, please log in with GitHub.</p>
+                <button
+                    onClick={gitHubSignIn}
+                    className="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-transform transform hover:scale-105"
+                >
+                    Log in with GitHub
+                </button>
             </div>
+        );
+    }
+  
+    return (
+        <main className="bg-white min-h-screen flex flex-col">
+            <header className="flex justify-between items-center p-4 bg-blue-600 shadow-md">
+                <h1 className="text-3xl text-white font-bold text-center flex-1">Shopping List</h1>
+                <button
+                    onClick={handleLogout}
+                    className="bg-red-600 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition-transform transform hover:scale-105"
+                >
+                    Log Out
+                </button>
+            </header>
+            <div className="flex flex-1">
+                <section className="w-1/2 p-4 border-r border-gray-200">
+                    <NewItem onAddItem={handleAddItem} />
+                    <ItemList items={items} onItemSelect={handleItemSelect} />
+                </section>
+                <section className="w-1/2 p-4">
+                    {selectedItemName && <MealIdeas ingredient={selectedItemName} />}
+                </section>
+            </div>
+        </main>
     );
-}
-}
-
+}; 
+  
 export default Page;

@@ -39,6 +39,11 @@ const Home = () => {
           <button className="w-full h-12 bg-blue-950 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-5">week-8</button>
         </Link>
       </div>
+      <div className="w-64">
+        <Link href="/week-9">
+          <button className="w-full h-12 bg-blue-950 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-5">week-9</button>
+        </Link>
+      </div>
     </div>
   );
 };

@@ -2,10 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { useUserAuth } from './_utils/auth-context';
 import { useRouter } from 'next/navigation';
-import ItemList from './shopping-list/item-list';
-import NewItem from './shopping-list/new-item';
-import MealIdeas from './shopping-list/meal-ideas';
-import itemsData from './shopping-list/items.json'; 
+import ItemList from '../shopping-list/item-list';
+import NewItem from '../shopping-list/new-item';
+import MealIdeas from '../shopping-list/meal-ideas';
 
 const Page = () => {
     const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
@@ -23,7 +22,7 @@ const Page = () => {
     const handleLogout = async () => {
         try {
             await firebaseSignOut();
-            router.push('/week-8'); 
+            router.push('/week-9'); 
         } catch (error) {
             console.error("Logout failed:", error);
         }
